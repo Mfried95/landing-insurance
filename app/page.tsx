@@ -22,8 +22,8 @@ export default function Page() {
         <Navbar />
         <main className="flex-1">
           <Hero />
-          <CoverageCards />
           <PartnersCarousel />
+          <CoverageCards />
           <QuoteForm />
         </main>
         <Footer />
