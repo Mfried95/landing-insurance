@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: "https://yourdomain.com",
+  siteUrl: "https://www.ontarioriskinsurance.com",
   generateRobotsTxt: true,
 };
