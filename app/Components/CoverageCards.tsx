@@ -15,18 +15,18 @@ const cards: CardProps[] = [
   {
     title: "Home Insurance",
     description: "Protect your home from damage, theft, and natural disasters.",
-    imageUrl: "/assets/home.jpg",
+    imageUrl: "/assets/auto.jpg",
   },
   {
     title: "Commercial Insurance",
     description: "Coverage for your business, liability, and property protection.",
-    imageUrl: "/assets/commercial.jpg",
+    imageUrl: "/assets/auto.jpg",
   },
 ];
 
 export default function CoverageCards() {
   return (
-    <section className="py-20" aria-label="Coverage options">
+    <section className="py-20 bg-[#e3e3e3]" aria-label="Coverage options">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-center font-poppins text-text">
           Coverage Options
@@ -36,7 +36,7 @@ export default function CoverageCards() {
           {cards.map((card) => (
             <article
               key={card.title}
-              className="bg-white rounded-xl shadow-lg overflow-hidden border"
+              className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
             >
               <Image
                 src={card.imageUrl}
