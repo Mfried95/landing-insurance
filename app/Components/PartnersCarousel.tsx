@@ -1,7 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, FreeMode } from "swiper/modules";
 import "swiper/css";
 
 const logos = [
@@ -29,23 +29,24 @@ const logos = [
 
 export default function PartnersCarousel() {
   return (
-    <section className="py-10 bg-white overflow-hidden">
+    <section className="py-12 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-center text-sm font-semibold text-gray-600 mb-6">
+        <h2 className="text-center text-sm font-semibold text-gray-600 mb-8">
           Trusted by Canada’s leading insurance providers
         </h2>
 
         <Swiper
-          modules={[Autoplay]}
+          modules={[Autoplay, FreeMode]}
           loop
-          speed={3500}
+          freeMode
+          speed={4000}
           autoplay={{
             delay: 0,
             disableOnInteraction: false,
           }}
-          slidesPerView={2}
-          spaceBetween={50}
           allowTouchMove={false}
+          slidesPerView={2}
+          spaceBetween={16}
           breakpoints={{
             640: { slidesPerView: 3 },
             768: { slidesPerView: 4 },
@@ -55,13 +56,13 @@ export default function PartnersCarousel() {
           {logos.map((logo, index) => (
             <SwiperSlide
               key={index}
-              className="flex justify-center items-center"
+              className="flex items-center justify-center h-50"
             >
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-10 md:h-12 lg:h-30 object-contain"
                 loading="lazy"
+                className="h-30 w-auto object-contain"
               />
             </SwiperSlide>
           ))}
