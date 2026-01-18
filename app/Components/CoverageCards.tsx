@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 type CardProps = {
   title: string;
@@ -25,18 +28,44 @@ const cards: CardProps[] = [
 ];
 
 export default function CoverageCards() {
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const cards = cardsRef.current?.querySelectorAll(".card");
+    if (!cards) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const card = entry.target as HTMLElement;
+            card.classList.add("card-visible");
+            card.classList.remove("card-hidden");
+            observer.unobserve(card);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="py-20 bg-[#e3e3e3]" aria-label="Coverage options">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center font-poppins text-text">
+        <h2 className="text-3xl font-bold text-center font-poppins text-[#0c1512]">
           Coverage Options
         </h2>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {cards.map((card) => (
+        <div ref={cardsRef} className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {cards.map((card, index) => (
             <article
               key={card.title}
-              className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
+              className="card card-hidden bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
+              style={{ transitionDelay: `${index * 300}ms` }} // slower stagger
             >
               <Image
                 src={card.imageUrl}
@@ -47,11 +76,13 @@ export default function CoverageCards() {
               />
 
               <div className="p-6">
-                <h3 className="text-xl font-bold font-poppins">{card.title}</h3>
-                <p className="mt-2 text-gray-700">{card.description}</p>
+                <h3 className="text-xl font-bold font-poppins text-[#0c1512]">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-[#0c1512]">{card.description}</p>
                 <a
                   href="#quote"
-                  className="mt-4 inline-block text-primary font-semibold hover:underline"
+                  className="mt-4 inline-block text-[#0c1512] font-semibold hover:underline"
                 >
                   More Info
                 </a>
