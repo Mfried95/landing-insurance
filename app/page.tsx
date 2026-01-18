@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import CoverageCards from "./components/CoverageCards";
 import QuoteForm from "./components/QuoteForm";
 import Footer from "./components/Footer";
+import PartnersCarousel from "./components/PartnersCarousel";
 
 export default function Page() {
   return (
@@ -22,6 +23,7 @@ export default function Page() {
         <main className="flex-1">
           <Hero />
           <CoverageCards />
+          <PartnersCarousel />
           <QuoteForm />
         </main>
         <Footer />
