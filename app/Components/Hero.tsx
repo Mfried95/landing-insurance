@@ -87,7 +87,7 @@ export default function Hero() {
             <span className="text-slate-600"> Insurance Broker (Ontario)</span>
           </p>
 
-          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
             Auto & Home Insurance You Can Trust
           </h1>
 
