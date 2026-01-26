@@ -44,7 +44,7 @@ export default function PartnersCarousel() {
             delay: 0,
             disableOnInteraction: false,
           }}
-          allowTouchMove={false}
+          allowTouchMove={true}
           slidesPerView={2}
           spaceBetween={16}
           breakpoints={{

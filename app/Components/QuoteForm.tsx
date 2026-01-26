@@ -20,13 +20,19 @@ export default function QuoteForm() {
       message: formData.get("message"),
     };
 
+    console.log("Submitting:", data);
+
     const res = await fetch("https://formspree.io/f/xwvvldzw", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",  // ✅ REQUIRED
       },
       body: JSON.stringify(data),
     });
+
+    const result = await res.json();
+    console.log("Response:", result);
 
     if (res.ok) {
       setStatus("success");
@@ -94,11 +100,13 @@ export default function QuoteForm() {
             />
           </label>
 
-          <button className="md:col-span-2 bg-blue-600 text-white font-semibold rounded-lg py-3 cursor-pointer hover:bg-blue-700 transition">
+          <button
+            type="submit"
+            className="md:col-span-2 bg-blue-600 text-white font-semibold rounded-lg py-3 cursor-pointer hover:bg-blue-700 transition"
+          >
             Submit Request
           </button>
 
-          {/* Custom Success/Error Messages */}
           {status === "success" && (
             <p className="md:col-span-2 text-center text-green-600 font-semibold">
               Thanks! Your request was submitted — we will be in touch shortly.
