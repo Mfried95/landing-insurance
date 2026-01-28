@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ontario Risk Insurance",
   description: "Licensed insurance broker in Ontario",
+  icons: {
+    icon: "/assets/ori.svg", // ✅ Your SVG favicon
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>
