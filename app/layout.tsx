@@ -12,23 +12,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export const metadata: Metadata = {
   title: {
-    default: "Rate Shop Ontario | Home, Auto & Commercial Insurance",
-    template: "%s | Ontario Insurance Brokers",
+    default: "Home & Auto Insurance Ontario | Licensed Insurance Broker",
+    template: "%s | Ontario Risk Insurance",
   },
 
   description:
-    "Licensed Ontario insurance brokers providing personalized home, auto, and commercial insurance coverage with competitive rates.",
+    "Licensed Ontario insurance broker helping drivers, homeowners, and businesses find affordable auto, home, and commercial insurance coverage.",
 
   keywords: [
     "Ontario insurance broker",
     "auto insurance Ontario",
     "home insurance Ontario",
     "commercial insurance Ontario",
-    "insurance quote Ontario",
-    "licensed insurance broker Ontario",
+    "insurance quotes Ontario",
+    "best insurance rates Ontario",
   ],
 
   icons: {
@@ -36,10 +35,9 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title:
-      "Ontario Insurance Brokers | Home, Auto & Commercial Insurance",
+    title: "Home & Auto Insurance Ontario | Licensed Insurance Broker",
     description:
-      "Compare personalized insurance coverage options with licensed Ontario brokers.",
+      "Compare personalized auto, home, and commercial insurance options with a licensed Ontario broker.",
     type: "website",
     locale: "en_CA",
   },
@@ -48,24 +46,25 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-};
 
+  verification: {
+    google:
+      "nHql2_c6aT6MHW_PtHnhDqr1DfG99rn5lNVC1FH8484",
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    <html lang="en-CA">
-
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
-
     </html>
   );
 }
