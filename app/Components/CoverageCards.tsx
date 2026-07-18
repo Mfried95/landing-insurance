@@ -90,11 +90,12 @@ export default function CoverageCards() {
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-center font-poppins text-[#0c1512]">
           Coverage Options
+          
         </h2>
 
         <p className="mt-4 max-w-2xl mx-auto text-center text-[#0c1512]/80">
           Flexible insurance solutions designed to protect what matters most —
-          whether it’s your vehicle, home, or business.
+          whether it's your vehicle, home, or business.
         </p>
 
         {/* Cards */}
@@ -105,7 +106,8 @@ export default function CoverageCards() {
           {cards.map((card, index) => (
             <article
               key={card.title}
-              className="card card-hidden group relative bg-white rounded-2xl overflow-hidden border border-gray-200
+              onClick={() => setActiveCard(card)}
+              className="card card-hidden group relative cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-200
                          shadow-[0_10px_30px_rgba(0,0,0,0.08)]
                          transition-all duration-500 hover:-translate-y-2
                          hover:shadow-[0_20px_45px_rgba(0,0,0,0.15)]"
@@ -120,7 +122,6 @@ export default function CoverageCards() {
                   className="object-cover"
                 />
 
-                {/* Image overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
 
@@ -134,16 +135,12 @@ export default function CoverageCards() {
                   {card.description}
                 </p>
 
-                <button
-                  onClick={() => setActiveCard(card)}
-                  className="mt-5 inline-flex items-center gap-2 font-semibold text-[#0c1512]
-                             hover:text-black transition-colors cursor-pointer"
-                >
+                <div className="mt-5 inline-flex items-center gap-2 font-semibold text-[#0c1512]">
                   More Info
                   <span className="transition-transform group-hover:translate-x-1">
                     →
                   </span>
-                </button>
+                </div>
               </div>
             </article>
           ))}
@@ -151,15 +148,22 @@ export default function CoverageCards() {
 
         {/* Modal */}
         {activeCard && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="w-full max-w-md bg-white rounded-2xl p-6 shadow-lg">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+            onClick={() => setActiveCard(null)}
+          >
+            <div
+              className="w-full max-w-md bg-white rounded-2xl p-6 shadow-lg"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-bold font-poppins text-[#0c1512]">
                   {activeCard.title}
                 </h3>
+
                 <button
                   onClick={() => setActiveCard(null)}
-                  className="text-[#0c1512] font-bold"
+                  className="text-[#0c1512] text-xl font-bold hover:text-black"
                 >
                   ✕
                 </button>
@@ -187,8 +191,7 @@ export default function CoverageCards() {
 
                 <button
                   onClick={goToQuote}
-                  className="inline-flex items-center justify-center rounded-full bg-[#0c1512]
-                             px-6 py-2 text-white font-semibold hover:bg-black transition"
+                  className="inline-flex items-center justify-center rounded-full bg-[#0c1512] px-6 py-2 text-white font-semibold hover:bg-black transition"
                 >
                   Get a Quote
                 </button>
@@ -204,14 +207,15 @@ export default function CoverageCards() {
           </h3>
 
           <p className="mt-4 max-w-3xl mx-auto text-center text-[#0c1512]/80">
-            Our licensed insurance brokers work with Canada’s leading providers to compare policies and find you the best coverage at the best price — with no obligation.
+            Our licensed insurance brokers work with Canada's leading providers
+            to compare policies and find you the best coverage at the best price
+            — with no obligation.
           </p>
 
           <div className="mt-8 flex justify-center">
             <button
               onClick={goToQuote}
-              className="inline-flex items-center justify-center rounded-full bg-[#0c1512]
-                         px-8 py-3 text-white font-semibold hover:bg-black transition-colors"
+              className="inline-flex items-center justify-center rounded-full bg-[#0c1512] px-8 py-3 text-white font-semibold hover:bg-black transition-colors"
             >
               Get a Free Quote
             </button>

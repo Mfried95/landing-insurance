@@ -82,7 +82,6 @@ export default function Hero() {
       >
         <div className="hero-item inline-block p-10 rounded-2xl bg-white/60 backdrop-blur-md border border-white/30">
           <p className="text-sm uppercase tracking-wide text-slate-500 mb-4">
-            <span className="text-slate-600">Michael Friedman · </span>
             <span className="text-blue-600 font-semibold">RIBO Licensed</span>
             <span className="text-slate-600"> Insurance Broker (Ontario)</span>
           </p>

@@ -26,7 +26,7 @@ export default function Navbar() {
           </svg>
 
           <div className="font-bold text-lg">
-            Ontario Risk Insurance
+            Best Rates in Ontario
           </div>
         </div>
 
