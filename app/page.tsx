@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Auto & Home Insurance | Your Broker Name</title>
+        <title>Auto & Home Insurance</title>
         <meta
           name="description"
           content="Get affordable auto and home insurance quotes from a trusted insurance broker. Fast, reliable, and local service."
