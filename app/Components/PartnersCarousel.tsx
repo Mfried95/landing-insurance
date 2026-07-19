@@ -31,7 +31,16 @@ export default function PartnersCarousel() {
   return (
     <section className="py-12 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-center text-sm font-semibold text-gray-600 mb-8">
+
+        <h2
+          className="
+            text-center
+            text-sm
+            font-semibold
+            text-gray-600
+            mb-8
+          "
+        >
           Trusted by Canada’s leading insurance providers
         </h2>
 
@@ -39,34 +48,72 @@ export default function PartnersCarousel() {
           modules={[Autoplay, FreeMode]}
           loop
           freeMode
-          speed={4000}
+          speed={7000}
           autoplay={{
             delay: 0,
             disableOnInteraction: false,
           }}
           allowTouchMove={true}
           slidesPerView={2}
-          spaceBetween={16}
+          spaceBetween={20}
           breakpoints={{
-            640: { slidesPerView: 3 },
-            768: { slidesPerView: 4 },
-            1024: { slidesPerView: 6 },
+            640: {
+              slidesPerView: 3,
+            },
+            768: {
+              slidesPerView: 4,
+            },
+            1024: {
+              slidesPerView: 6,
+            },
           }}
         >
           {logos.map((logo, index) => (
             <SwiperSlide
               key={index}
-              className="flex items-center justify-center h-50"
+              className="
+                relative
+                flex
+                h-50
+                items-center
+                justify-center
+              "
             >
+
+              {/* Gold Fade Divider */}
+              <div
+                className="
+                  absolute
+                  right-0
+                  top-1/2
+                  h-20
+                  w-px
+                  -translate-y-1/2
+                  bg-gradient-to-b
+                  from-transparent
+                  via-[#d4af37]/30
+                  to-transparent
+                "
+              />
+
               <img
                 src={logo.src}
                 alt={logo.alt}
                 loading="lazy"
-                className="h-30 w-auto object-contain"
+                className="
+                  h-auto
+                  w-auto
+                  object-contain
+                  transition-transform
+                  duration-300
+                  hover:scale-105
+                "
               />
+
             </SwiperSlide>
           ))}
         </Swiper>
+
       </div>
     </section>
   );
