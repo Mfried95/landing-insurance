@@ -28,6 +28,17 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
+  const insuranceTags = [
+    "Auto Insurance Ontario",
+    "High Risk Auto Insurance",
+    "Home Insurance Ontario",
+    "Business Insurance",
+    "New Driver Insurance",
+    "Commercial Insurance",
+    "Tenant Insurance",
+    "Personal Insurance",
+  ];
+
   return (
     <section
       id="home"
@@ -66,6 +77,7 @@ export default function Hero() {
         "
       />
 
+
       <div
         ref={heroRef}
         className={`
@@ -82,6 +94,7 @@ export default function Hero() {
           }
         `}
       >
+
         {/* Glass Container */}
         <div
           className="
@@ -95,35 +108,55 @@ export default function Hero() {
             md:p-12
           "
         >
-          {/* Badge */}
+
+          {/* Trust + SEO Badges */}
           <div
             className="
               mx-auto
-              inline-flex
+              flex
+              flex-wrap
               items-center
-              gap-2
-              rounded-full
-              bg-white/80
-              px-5
-              py-2
-              text-sm
-              font-semibold
-              text-[#0c1512]
-              shadow-sm
+              justify-center
+              gap-3
             "
           >
-            <span
-              className="
-                h-2
-                w-2
-                rounded-full
-                bg-[#f7ce40]
-              "
-            />
 
-            RIBO Licensed Insurance Broker
+            <div
+              className="
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                bg-white/80
+                px-5
+                py-2
+                text-sm
+                font-semibold
+                text-[#0c1512]
+                shadow-sm
+              "
+            >
+
+              <span
+                className="
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-[#f7ce40]
+                "
+              />
+
+              RIBO Licensed Insurance Broker
+
+            </div>
+
+
+            
+
           </div>
 
+
+          {/* Main Heading */}
           <h1
             className="
               mx-auto
@@ -138,10 +171,17 @@ export default function Hero() {
               md:text-5xl
             "
           >
-            Auto, Home & Business Insurance
-            <span className="text-[#b48b00]"> Made Simple</span>
+
+            Ontario Auto, Home & Business Insurance
+
+            <span className="text-[#b48b00]">
+              {" "}Made Simple
+            </span>
+
           </h1>
 
+
+          {/* SEO Optimized Description */}
           <p
             className="
               mx-auto
@@ -153,10 +193,12 @@ export default function Hero() {
               text-[#0c1512]/70
             "
           >
-            Get personalized insurance solutions from licensed Ontario brokers.
-            We compare trusted providers to help you find coverage that fits
-            your needs and budget.
+            Get personalized auto insurance, high risk auto insurance, home
+            insurance, and business insurance solutions from licensed Ontario
+            brokers. We compare trusted providers to help you find coverage
+            that fits your needs and budget.
           </p>
+
 
           {/* Buttons */}
           <div
@@ -170,6 +212,7 @@ export default function Hero() {
               sm:flex-row
             "
           >
+
             <a
               href="#quote"
               className="
@@ -191,6 +234,7 @@ export default function Hero() {
                 hover:text-white
               "
             >
+
               Get Your Free Quote
 
               <span
@@ -203,10 +247,14 @@ export default function Hero() {
               >
                 →
               </span>
+
             </a>
 
+
             <BookNow />
+
           </div>
+
 
           {/* Stats */}
           <div
@@ -221,6 +269,7 @@ export default function Hero() {
               sm:grid-cols-3
             "
           >
+
             <div
               className="
                 rounded-2xl
@@ -236,7 +285,9 @@ export default function Hero() {
               <p className="text-sm text-gray-600">
                 Insurance Providers
               </p>
+
             </div>
+
 
             <div
               className="
@@ -246,6 +297,7 @@ export default function Hero() {
                 text-center
               "
             >
+
               <p className="text-2xl font-bold text-[#0c1512]">
                 RIBO
               </p>
@@ -253,7 +305,9 @@ export default function Hero() {
               <p className="text-sm text-gray-600">
                 Licensed Broker
               </p>
+
             </div>
+
 
             <div
               className="
@@ -263,6 +317,7 @@ export default function Hero() {
                 text-center
               "
             >
+
               <p className="text-2xl font-bold text-[#0c1512]">
                 Ontario
               </p>
@@ -270,10 +325,73 @@ export default function Hero() {
               <p className="text-sm text-gray-600">
                 Local Expertise
               </p>
+
             </div>
+
           </div>
+
+
+          {/* SEO Service Tags */}
+          <div
+            className="
+              mt-10
+              border-t
+              border-black/10
+              pt-8
+            "
+          >
+
+            <p
+              className="
+                mb-4
+                text-center
+                text-sm
+                font-semibold
+                text-[#0c1512]/70
+              "
+            >
+              Insurance Solutions We Help With
+            </p>
+
+
+            <div
+              className="
+                flex
+                flex-wrap
+                justify-center
+                gap-3
+              "
+            >
+
+              {insuranceTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="
+                    rounded-full
+                    bg-white/70
+                    px-5
+                    py-2
+                    text-sm
+                    font-medium
+                    text-[#0c1512]
+                    shadow-sm
+                    transition
+                    hover:bg-[#f7ce40]
+                  "
+                >
+                  {tag}
+                </span>
+              ))}
+
+            </div>
+
+          </div>
+
+
         </div>
+
       </div>
+
     </section>
   );
 }
