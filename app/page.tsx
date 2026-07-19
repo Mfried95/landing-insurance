@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import Navbar from "./Components/Navbar";
 import Hero from "./Components/Hero";
 import CoverageCards from "./Components/CoverageCards";
@@ -20,14 +21,26 @@ export default function Page() {
         <meta name="robots" content="index, follow" />
       </Head>
 
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-1BGFBR0ZSQ"
+      />
+
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-1BGFBR0ZSQ');
+        `}
+      </Script>
+
       <div className="min-h-screen flex flex-col">
 
         <Navbar />
 
-        <main
-          id="main-content"
-          className="flex-1"
-        >
+        <main id="main-content" className="flex-1">
           <Hero />
           <CoverageCards />
           <PartnersCarousel />
