@@ -10,23 +10,32 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Auto & Home Insurance</title>
+        <title>Auto & Home Insurance | Rate Shop Ontario</title>
+
         <meta
           name="description"
-          content="Get affordable auto and home insurance quotes from a trusted insurance broker. Fast, reliable, and local service."
+          content="Get affordable auto, home, and business insurance quotes from trusted Ontario insurance brokers. Fast, reliable, and personalized coverage."
         />
+
         <meta name="robots" content="index, follow" />
       </Head>
 
       <div className="min-h-screen flex flex-col">
+
         <Navbar />
-        <main className="flex-1">
+
+        <main
+          id="main-content"
+          className="flex-1"
+        >
           <Hero />
           <CoverageCards />
           <PartnersCarousel />
           <QuoteForm />
         </main>
+
         <Footer />
+
       </div>
     </>
   );
