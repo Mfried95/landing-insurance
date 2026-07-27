@@ -151,7 +151,33 @@ export default function Hero() {
             </div>
 
 
-            
+            <div
+              className="
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                bg-[#0c1512]/5
+                px-5
+                py-2
+                text-sm
+                font-semibold
+                text-[#0c1512]
+              "
+            >
+
+              <span
+                className="
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-blue-500
+                "
+              />
+
+      
+
+            </div>
 
           </div>
 

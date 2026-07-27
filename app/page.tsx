@@ -41,9 +41,13 @@ export default function Page() {
         <Navbar />
 
         <main id="main-content" className="flex-1">
+        <div className="pt-12 md:pt-16">
+    <PartnersCarousel />
+  </div>
+
           <Hero />
           <CoverageCards />
-          <PartnersCarousel />
+
           <QuoteForm />
         </main>
 
