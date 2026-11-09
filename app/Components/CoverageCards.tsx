@@ -1,24 +1,26 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
-type CardProps = {
+type Card = {
   title: string;
   category: string;
   description: string;
   imageUrl: string;
+  imageAlt: string; // TODO: make sure each alt describes what is actually in the photo
   features: string[];
   details: string[];
+  quoteLabel: string;
+  // TODO: once service pages exist, add e.g. href: "/auto-insurance-ontario"
 };
 
-const cards: CardProps[] = [
+const cards: Card[] = [
   {
     title: "Auto Insurance",
-    category: "PERSONAL INSURANCE",
+    category: "Personal insurance",
     description:
       "Flexible Ontario auto insurance coverage designed around your vehicle, driving needs, and budget. Explore protection options including collision, comprehensive coverage, and roadside assistance.",
     imageUrl: "/assets/auto.jpg",
+    imageAlt: "Car driving along a road in Ontario",
     features: ["Collision", "Roadside", "Comprehensive"],
     details: [
       "Collision and comprehensive coverage",
@@ -26,13 +28,15 @@ const cards: CardProps[] = [
       "Accident forgiveness protection",
       "Flexible deductible choices",
     ],
+    quoteLabel: "Get an auto insurance quote",
   },
   {
     title: "Home Insurance",
-    category: "PROPERTY INSURANCE",
+    category: "Property insurance",
     description:
       "Protect your home, belongings, and financial security with customized Ontario home insurance coverage designed for your property and lifestyle.",
     imageUrl: "/assets/home-card.jpg",
+    imageAlt: "Front of a house in an Ontario neighbourhood",
     features: ["Property", "Liability", "Water Protection"],
     details: [
       "Building and contents protection",
@@ -40,13 +44,15 @@ const cards: CardProps[] = [
       "Water damage protection options",
       "Coverage for valuable belongings",
     ],
+    quoteLabel: "Get a home insurance quote",
   },
   {
     title: "Commercial Insurance",
-    category: "BUSINESS INSURANCE",
+    category: "Business insurance",
     description:
       "Protect your Ontario business with commercial insurance solutions designed to safeguard your property, vehicles, employees, and operations.",
     imageUrl: "/assets/business-card.jpg",
+    imageAlt: "Small business storefront and commercial vehicle",
     features: ["Business", "Liability", "Vehicles"],
     details: [
       "Commercial property protection",
@@ -54,438 +60,144 @@ const cards: CardProps[] = [
       "Commercial vehicle insurance",
       "Business interruption protection",
     ],
+    quoteLabel: "Get a commercial insurance quote",
   },
 ];
 
 export default function CoverageCards() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeCard, setActiveCard] = useState<CardProps | null>(null);
-
-  const goToQuote = () => {
-    setActiveCard(null);
-
-    document
-      .querySelector("#quote")
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-  };
-
-  useEffect(() => {
-    const elements =
-      cardsRef.current?.querySelectorAll(".coverage-card");
-
-    if (!elements) return;
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(
-              "opacity-100",
-              "translate-y-0"
-            );
-
-            entry.target.classList.remove(
-              "opacity-0",
-              "translate-y-8"
-            );
-
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    elements.forEach(card => observer.observe(card));
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const escape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveCard(null);
-    };
-
-    window.addEventListener("keydown", escape);
-
-    return () =>
-      window.removeEventListener("keydown", escape);
-  }, []);
-
   return (
     <section
       id="coverage"
-      className="
-      relative overflow-hidden
-      bg-[#f8faf9]
-      py-20
-      "
-      aria-label="Insurance coverage options in Ontario"
+      aria-labelledby="coverage-heading"
+      className="relative scroll-mt-20 overflow-hidden bg-[#f8faf9] py-20"
     >
+      {/* Decorative background shapes */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-20 h-80 w-80 rounded-full bg-[#f7ce40]/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-20 left-0 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl"
+      />
 
-      <div className="
-      absolute right-0 top-20
-      h-80 w-80
-      rounded-full
-      bg-[#f7ce40]/20
-      blur-3xl
-      " />
-
-      <div className="
-      absolute left-0 bottom-20
-      h-72 w-72
-      rounded-full
-      bg-blue-200/30
-      blur-3xl
-      " />
-
-
-      <div className="
-      relative mx-auto max-w-6xl px-6
-      ">
-
-        <div className="
-        mx-auto max-w-3xl text-center
-        ">
-
-          <span className="
-          rounded-full
-          bg-white/70
-          px-5 py-2
-          text-xs font-bold
-          tracking-wider
-          shadow-sm
-          backdrop-blur
-          text-[#0c1512]
-          ">
+      <div className="relative mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="inline-block rounded-full bg-white/70 px-5 py-2 text-xs font-bold tracking-wider text-[#0c1512] shadow-sm backdrop-blur">
             Coverage Solutions
-          </span>
+          </p>
 
-          <h2 className="
-          mt-5
-          text-4xl
-          font-bold
-          text-[#0c1512]
-          ">
+          <h2
+            id="coverage-heading"
+            className="mt-5 text-4xl font-bold text-[#0c1512]"
+          >
             Insurance Coverage Options in Ontario
           </h2>
 
-          <p className="
-          mt-4
-          text-lg
-          leading-relaxed
-          text-[#0c1512]/70
-          ">
-            Compare personalized auto, home, and commercial insurance
-            solutions with licensed Ontario brokers who help you find
-            coverage that fits your needs.
+          <p className="mt-4 text-lg leading-relaxed text-[#0c1512]/70">
+            Compare personalized auto, home, and commercial insurance solutions
+            with licensed Ontario brokers who help you find coverage that fits
+            your needs.
           </p>
-
         </div>
 
-
-        <div
-          ref={cardsRef}
-          className="
-          mt-12
-          grid
-          grid-cols-1
-          gap-6
-          md:grid-cols-3
-          "
-        >
-
-          {cards.map((card,index)=>(
-
+        <div className="mt-12 grid grid-cols-1 items-start gap-6 md:grid-cols-3">
+          {cards.map((card) => (
             <article
               key={card.title}
-              onClick={() => setActiveCard(card)}
-              className="
-              coverage-card
-              group
-              cursor-pointer
-              opacity-0
-              translate-y-8
-              overflow-hidden
-              rounded-3xl
-              bg-white/70
-              backdrop-blur-xl
-              border border-white
-              shadow-[0_15px_40px_rgba(0,0,0,.07)]
-              transition-all
-              duration-700
-              hover:-translate-y-2
-              hover:border-[#f7ce40]
-              hover:shadow-[0_25px_60px_rgba(0,0,0,.15)]
-              "
-              style={{
-                transitionDelay:`${index * 150}ms`
-              }}
+              className="group overflow-hidden rounded-3xl border border-white bg-white/70 shadow-[0_15px_40px_rgba(0,0,0,.07)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:border-[#f7ce40] hover:shadow-[0_25px_60px_rgba(0,0,0,.15)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
-
-              <div className="
-              relative h-40 overflow-hidden
-              ">
-
+              <div className="relative h-40 overflow-hidden">
                 <Image
                   src={card.imageUrl}
-                  alt={`${card.title} insurance Ontario`}
+                  alt={card.imageAlt}
                   fill
-                  className="
-                  object-cover
-                  transition-transform
-                  duration-700
-                  group-hover:scale-110
-                  "
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />
-
-                <div className="
-                absolute inset-0
-                bg-gradient-to-t
-                from-black/50
-                to-transparent
-                " />
-
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
+                />
               </div>
 
-
               <div className="p-6">
-
-                <p className="
-                text-xs
-                font-bold
-                tracking-wider
-                text-[#b08b18]
-                ">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#7a5f00]">
                   {card.category}
                 </p>
 
-
-                <h3 className="
-                mt-3
-                text-2xl
-                font-bold
-                text-[#0c1512]
-                ">
+                <h3 className="mt-3 text-2xl font-bold text-[#0c1512]">
                   {card.title}
                 </h3>
 
-
-                <p className="
-                mt-3
-                text-sm
-                leading-relaxed
-                text-[#0c1512]/70
-                ">
+                <p className="mt-3 text-sm leading-relaxed text-[#0c1512]/70">
                   {card.description}
                 </p>
 
-
-                <div className="
-                mt-5
-                flex
-                flex-wrap
-                gap-2
-                ">
-
-                  {card.features.map(feature => (
-
-                    <span
+                <ul
+                  aria-label={`${card.title} highlights`}
+                  className="mt-5 flex flex-wrap gap-2"
+                >
+                  {card.features.map((feature) => (
+                    <li
                       key={feature}
-                      className="
-                      rounded-full
-                      bg-[#0c1512]/5
-                      px-3 py-1
-                      text-xs
-                      font-medium
-                      text-[#0c1512]
-                      "
+                      className="rounded-full bg-[#0c1512]/5 px-3 py-1 text-xs font-medium text-[#0c1512]"
                     >
                       {feature}
-                    </span>
-
+                    </li>
                   ))}
+                </ul>
 
-                </div>
+                {/* Native expand/collapse: the content is always in the HTML, so search engines can read it */}
+                <details className="mt-5">
+                  <summary className="cursor-pointer rounded text-sm font-semibold text-[#0c1512] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0c1512]">
+                    What’s included
+                  </summary>
+                  <ul className="mt-3 space-y-2">
+                    {card.details.map((item) => (
+                      <li key={item} className="text-sm text-[#0c1512]/80">
+                        <span aria-hidden="true" className="text-[#8a6d00]">
+                          ✓
+                        </span>{" "}
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
 
-
-                <div className="
-                mt-6
-                inline-flex
-                rounded-full
-                bg-[#f7ce40]
-                px-6 py-2.5
-                text-sm
-                font-semibold
-                text-[#0c1512]
-                transition
-                group-hover:bg-[#0c1512]
-                group-hover:text-white
-                ">
-                  Explore Coverage →
-                </div>
-
+                <Link
+                  href="/#quote"
+                  className="mt-6 inline-flex rounded-full bg-[#f7ce40] px-6 py-2.5 text-sm font-semibold text-[#0c1512] transition hover:bg-[#0c1512] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0c1512]"
+                >
+                  {card.quoteLabel}
+                  <span aria-hidden="true" className="ml-2">
+                    →
+                  </span>
+                </Link>
               </div>
-
             </article>
-
           ))}
-
         </div>
 
-
-        <div className="
-        mt-14
-        rounded-3xl
-        bg-white/70
-        p-8
-        text-center
-        backdrop-blur-xl
-        shadow-[0_20px_60px_rgba(0,0,0,.08)]
-        ">
-
-          <h3 className="
-          text-3xl
-          font-bold
-          text-[#0c1512]
-          ">
+        <div className="mt-14 rounded-3xl bg-white/70 p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,.08)] backdrop-blur-xl">
+          <h3 className="text-3xl font-bold text-[#0c1512]">
             Find the Right Insurance Coverage
           </h3>
 
-
-          <p className="
-          mx-auto mt-3
-          max-w-2xl
-          text-[#0c1512]/70
-          ">
-            Our licensed Ontario insurance brokers compare trusted
-            providers to help you find the right protection for your
-            vehicle, home, or business.
+          <p className="mx-auto mt-3 max-w-2xl text-[#0c1512]/70">
+            Our licensed Ontario insurance brokers compare trusted providers to
+            help you find the right protection for your vehicle, home, or
+            business.
           </p>
 
-
-          <button
-            onClick={goToQuote}
-            className="
-            mt-6
-            rounded-full
-            bg-[#f7ce40]
-            px-10 py-3
-            font-semibold
-            text-[#0c1512]
-            transition
-            hover:-translate-y-1
-            hover:bg-[#0c1512]
-            hover:text-white
-            "
+          <Link
+            href="/#quote"
+            className="mt-6 inline-flex rounded-full bg-[#f7ce40] px-10 py-3 font-semibold text-[#0c1512] transition hover:-translate-y-1 hover:bg-[#0c1512] hover:text-white motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0c1512]"
           >
             Get Your Free Quote
-          </button>
-
+          </Link>
         </div>
-
       </div>
-
-
-      {activeCard && (
-
-        <div
-          onClick={() => setActiveCard(null)}
-          className="
-          fixed inset-0 z-50
-          flex items-center justify-center
-          bg-black/50
-          backdrop-blur-sm
-          p-5
-          "
-        >
-
-          <div
-            onClick={e => e.stopPropagation()}
-            className="
-            max-w-md
-            rounded-3xl
-            bg-white
-            p-8
-            shadow-2xl
-            "
-          >
-
-            <div className="flex justify-between">
-
-              <h3 className="
-              text-2xl
-              font-bold
-              text-[#0c1512]
-              ">
-                {activeCard.title}
-              </h3>
-
-              <button
-                onClick={() => setActiveCard(null)}
-                className="text-xl"
-              >
-                ✕
-              </button>
-
-            </div>
-
-
-            <p className="
-            mt-4
-            text-[#0c1512]/70
-            ">
-              {activeCard.description}
-            </p>
-
-
-            <ul className="
-            mt-5 space-y-3
-            ">
-
-              {activeCard.details.map(item => (
-
-                <li
-                  key={item}
-                  className="text-[#0c1512]/80"
-                >
-                  <span className="text-[#c9a227]">
-                    ✓
-                  </span>{" "}
-                  {item}
-                </li>
-
-              ))}
-
-            </ul>
-
-
-            <button
-              onClick={goToQuote}
-              className="
-              mt-8
-              w-full
-              rounded-full
-              bg-[#f7ce40]
-              py-3
-              font-semibold
-              transition
-              hover:bg-[#0c1512]
-              hover:text-white
-              "
-            >
-              Request Your Quote
-            </button>
-
-          </div>
-
-        </div>
-
-      )}
-
     </section>
   );
 }
